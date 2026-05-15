@@ -159,7 +159,7 @@ const CaptainHome = () => {
         <img className="w-25 -mt-15 ml-3 absolute z-6" src="/Logo.png" alt="" />
 
         <Link
-          to="/home"
+          to="/captain-login"
           className="fixed right-2 top-2 h-10 w-10 bg-white z-5 flex items-center justify-center rounded-full text-black"
         >
           <i className="text-lg font-bold ri-logout-box-fill"></i>
