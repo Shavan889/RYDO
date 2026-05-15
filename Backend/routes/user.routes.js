@@ -15,7 +15,7 @@ router.post(
       .isLength({ min: 6 })
       .withMessage("Password must be 6 character long"),
   ],
-  userController.registerUser,
+  userController.registerUser,  
 );
 
 router.post(
