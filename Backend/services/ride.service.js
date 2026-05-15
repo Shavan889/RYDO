@@ -1,4 +1,3 @@
-const { send } = require("vite");
 const rideModel = require("../models/ride.model");
 const mapsService = require("./maps.service");
 const crypto = require("crypto");
