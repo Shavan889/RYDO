@@ -29,7 +29,7 @@ const UserSignup = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/users/register",
+       `${import.meta.env.VITE_BASE_URL}/users/register`,
         newUser,
       );
       if (response.status === 201) {
