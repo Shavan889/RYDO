@@ -8,10 +8,12 @@ const captainRoutes = require("./routes/captain.routes");
 const mapsRoutes = require("./routes/maps.routes");
 const rideRoutes = require("./routes/ride.routes");
 
-app.use(cors({
-  origin: "https://rydo-frontend.vercel.app",
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: "https://rydo-pi.vercel.app",
+    credentials: true,
+  }),
+);
 
 app.use(cookieParser());
 app.use(express.json());
