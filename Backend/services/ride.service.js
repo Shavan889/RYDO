@@ -155,16 +155,15 @@ module.exports.endRide = async ({ rideId, captain }) => {
   }
   if (!captain) {
     throw new Error("captain is required");
-
-    
-    const ride = await rideModel
-      .findOne({
-        _id: rideId,
-        captain: captain._id,
-      })
-      .populate("captain")
-      .select("+otp");
   }
+
+  const ride = await rideModel
+    .findOne({
+      _id: rideId,
+      captain: captain._id,
+    })
+    .populate("captain")
+    .populate("user");
 
   if (!ride) {
     throw new Error("Ride not found or you are not the captain of this ride");
@@ -173,9 +172,11 @@ module.exports.endRide = async ({ rideId, captain }) => {
     throw new Error("Ride is not ongoing");
   }
 
-  await rideModel.findByIdAndUpdate(rideId, {
+  const updatedRide = await rideModel.findByIdAndUpdate(rideId, {
     status: "completed",
-  });
+  }, { new: true })
+    .populate("captain")
+    .populate("user");
 
-  return ride;
+  return updatedRide;
 };

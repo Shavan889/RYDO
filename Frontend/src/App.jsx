@@ -14,6 +14,7 @@ import CaptainHome from "./pages/CaptainHome";
 import CaptainProtectWrapper from "./pages/CaptainProtectWrapper";
 import Riding from "./pages/Riding";
 import CaptainRiding from "./pages/CaptainRiding";
+import { Download } from "lucide-react";
 
 const App = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -48,13 +49,23 @@ const App = () => {
     <div>
       {/* Install Button */}
       {deferredPrompt && (
-        <button
-          onClick={handleInstall}
-          className="fixed bottom-5 right-5 z-50 bg-black text-white px-4 py-2 rounded-lg shadow-lg"
-        >
-          Install App
-        </button>
-      )}
+  <button
+    onClick={handleInstall}
+    className="
+    fixed top-5 right-5 z-50
+    flex items-center gap-2
+    bg-black text-white
+    px-4 py-2
+    rounded-full
+    shadow-xl
+    hover:scale-105
+    transition-all duration-300
+    "
+  >
+    <Download size={18} />
+    Install App
+  </button>
+)}
 
       <Routes>
         <Route path="/" element={<Start />} />
