@@ -10,7 +10,7 @@ const rideRoutes = require("./routes/ride.routes");
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:4173", "https://rydo-pi.vercel.app"],
+    origin: true,
     credentials: true,
   })
 );
