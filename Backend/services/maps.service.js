@@ -36,8 +36,7 @@ module.exports.getDistanceTime = async (origin, destination) => {
 
   try {
     // Step 1: Convert origin and destination into coordinates
-    const originCoords =
-      await module.exports.getAddressCoordinates(origin);
+    const originCoords = await module.exports.getAddressCoordinates(origin);
 
     const destinationCoords =
       await module.exports.getAddressCoordinates(destination);
@@ -67,12 +66,8 @@ module.exports.getDistanceTime = async (origin, destination) => {
       {
         headers: {
           "Content-Type": "application/json",
-          "X-Goog-Api-Key":
-            process.env.GOOGLE_MAPS_API,
-
-          // VERY IMPORTANT
-          "X-Goog-FieldMask":
-            "routes.distanceMeters,routes.duration",
+          "X-Goog-Api-Key": process.env.GOOGLE_MAPS_API,
+          "X-Goog-FieldMask": "routes.distanceMeters,routes.duration",
         },
       },
     );
@@ -93,9 +88,7 @@ module.exports.getDistanceTime = async (origin, destination) => {
         text: `${Math.ceil(
           parseInt(route.duration.replace("s", "")) / 60,
         )} mins`,
-        value: parseInt(
-          route.duration.replace("s", ""),
-        ),
+        value: parseInt(route.duration.replace("s", "")),
       },
     };
   } catch (error) {
@@ -120,7 +113,9 @@ module.exports.getSuggestions = async (input) => {
     if (response.data.status === "OK") {
       return response.data.predictions;
     } else {
-      throw new Error(`Google Maps API returned status: ${response.data.status} - ${response.data.error_message || ""}`);
+      throw new Error(
+        `Google Maps API returned status: ${response.data.status} - ${response.data.error_message || ""}`,
+      );
     }
   } catch (error) {
     console.error("[MAPS SERVICE] Error fetching suggestions:", error.message);

@@ -7,14 +7,22 @@ import UserContext from "./context/UserContext.jsx";
 import CaptainContext from "./context/CaptainContext.jsx";
 import SocketContext from "./context/SocketContext.jsx";
 
+import { registerSW } from "virtual:pwa-register";
+
+registerSW({
+  immediate: true,
+});
+
 createRoot(document.getElementById("root")).render(
-  <SocketContext>
-    <CaptainContext>
-      <UserContext>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </UserContext>
-    </CaptainContext>
-  </SocketContext>,
+  <StrictMode>
+    <SocketContext>
+      <CaptainContext>
+        <UserContext>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </UserContext>
+      </CaptainContext>
+    </SocketContext>
+  </StrictMode>
 );

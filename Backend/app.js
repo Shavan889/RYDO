@@ -10,9 +10,9 @@ const rideRoutes = require("./routes/ride.routes");
 
 app.use(
   cors({
-    origin: "https://rydo-pi.vercel.app",
+    origin: ["http://localhost:3000", "http://localhost:4173", "https://rydo-pi.vercel.app"],
     credentials: true,
-  }),
+  })
 );
 
 app.use(cookieParser());

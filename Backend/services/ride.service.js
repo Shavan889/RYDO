@@ -69,7 +69,7 @@ module.exports.createRide = async ({
 
   const fare = await getFare(pickup, destination);
 
-  const ride = rideModel.create({
+  const ride = await rideModel.create({
     user,
     pickup,
     destination,
@@ -100,12 +100,11 @@ module.exports.confirmRide = async ({ rideId, captainId }) => {
     .populate("captain")
     .select("+otp");
 
-  console.log("USER SOCKET ID:", ride.user.socketId);
-
   if (!ride) {
     throw new Error("Ride not found");
   }
 
+  console.log("USER SOCKET ID:", ride.user.socketId);
   return ride;
 };
 
@@ -151,19 +150,20 @@ module.exports.startRide = async ({ rideId, otp, captain }) => {
 };
 
 module.exports.endRide = async ({ rideId, captain }) => {
-  const ride = await rideModel
-    .findOne({
-      _id: rideId,
-      captain: captain._id,
-    })
-    .populate("captain")
-    .select("+otp");
-
   if (!rideId) {
     throw new Error("rideId is required");
   }
   if (!captain) {
     throw new Error("captain is required");
+
+    
+    const ride = await rideModel
+      .findOne({
+        _id: rideId,
+        captain: captain._id,
+      })
+      .populate("captain")
+      .select("+otp");
   }
 
   if (!ride) {

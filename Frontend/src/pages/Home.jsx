@@ -20,7 +20,6 @@ const panelClass =
   "fixed w-full bottom-0 z-10 px-4 pb-2 backdrop-blur-xl bg-black/70 border-t border-white/10";
 
 const Home = () => {
-  // ================= STATES =================
   const [pickup, setPickup] = useState("");
   const [destination, setDestination] = useState("");
 
@@ -38,7 +37,6 @@ const Home = () => {
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
 
-  // ================= REFS =================
   const panelRef = useRef(null);
   const downRef = useRef(null);
 
@@ -61,7 +59,6 @@ const Home = () => {
     navigate("/riding", { state: { ride } });
   });
 
-  // DEBUG: Log user changes
   useEffect(() => {
     console.log("[STATE UPDATE] User context updated:", user);
   }, [user]);
@@ -90,7 +87,6 @@ const Home = () => {
       userType: "user",
     });
 
-    // console.log("[ROOM JOIN] Join event emitted, setting roomJoined to true");
     setRoomJoined(true);
 
     return () => {
@@ -99,7 +95,6 @@ const Home = () => {
     };
   }, [socket, user]);
 
-  // RIDE CONFIRMED LISTENER - Set up AFTER room join is confirmed
   useEffect(() => {
     console.log(
       "[LISTENER SETUP] Checking conditions - socket:",
@@ -199,8 +194,6 @@ const Home = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
-    // validation
     if (!pickup || !destination) return;
 
     // close location panel
@@ -227,7 +220,7 @@ const Home = () => {
     }
     // console.log(response.data);
   };
-  // ================= FETCH SUGGESTIONS =================
+  //  FETCH SUGGESTIONS
 
   useEffect(() => {
     if (debounceRef.current) {

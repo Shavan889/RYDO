@@ -1,5 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import Start from "./pages/Start";
 import UserLogin from "./pages/UserLogin";
 import UserSignup from "./pages/UserSignup";
@@ -14,8 +16,46 @@ import Riding from "./pages/Riding";
 import CaptainRiding from "./pages/CaptainRiding";
 
 const App = () => {
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handler);
+    };
+  }, []);
+
+  const handleInstall = async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+
+    const choiceResult = await deferredPrompt.userChoice;
+
+    console.log(choiceResult.outcome);
+
+    setDeferredPrompt(null);
+  };
+
   return (
     <div>
+      {/* Install Button */}
+      {deferredPrompt && (
+        <button
+          onClick={handleInstall}
+          className="fixed bottom-5 right-5 z-50 bg-black text-white px-4 py-2 rounded-lg shadow-lg"
+        >
+          Install App
+        </button>
+      )}
+
       <Routes>
         <Route path="/" element={<Start />} />
         <Route path="/login" element={<UserLogin />} />
@@ -24,6 +64,7 @@ const App = () => {
         <Route path="/captain-signup" element={<CaptainSignup />} />
         <Route path="/riding" element={<Riding />} />
         <Route path="/captain-riding" element={<CaptainRiding />} />
+
         <Route
           path="/user/logout"
           element={
@@ -32,6 +73,7 @@ const App = () => {
             </UserProtectedWrapper>
           }
         />
+
         <Route
           path="/home"
           element={
@@ -40,6 +82,7 @@ const App = () => {
             </UserProtectedWrapper>
           }
         />
+
         <Route
           path="/Captain-Home"
           element={
