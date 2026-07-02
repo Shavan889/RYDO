@@ -24,6 +24,7 @@ function initializeSocket(server) {
         userType,
       } = data;
 
+      
       // JOIN ROOM
       socket.join(userId);
 

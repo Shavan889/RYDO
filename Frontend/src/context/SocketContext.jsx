@@ -16,7 +16,7 @@ const SocketContext = ({ children }) => {
       reconnectionDelayMax: 5000,
       reconnectionAttempts: 5,
     });
-
+    
     newSocket.on("connect", () => {
       console.log("Socket connected:", newSocket.id);
 

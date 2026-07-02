@@ -49,9 +49,9 @@ const App = () => {
     <div>
       {/* Install Button */}
       {deferredPrompt && (
-  <button
-    onClick={handleInstall}
-    className="
+        <button
+          onClick={handleInstall}
+          className="
     fixed top-5 right-5 z-50
     flex items-center gap-2
     bg-black text-white
@@ -61,11 +61,11 @@ const App = () => {
     hover:scale-105
     transition-all duration-300
     "
-  >
-    <Download size={18} />
-    Install App
-  </button>
-)}
+        >
+          <Download size={18} />
+          Install App
+        </button>
+      )}
 
       <Routes>
         <Route path="/" element={<Start />} />
